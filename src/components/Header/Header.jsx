@@ -15,6 +15,6 @@ import './Header.css'
 			</span>
 		</div>
 	);
- };
+ }; 
  
  export default Header;
