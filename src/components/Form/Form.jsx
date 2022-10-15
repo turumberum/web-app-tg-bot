@@ -1,6 +1,6 @@
 import './Form.css'
 import React, { useState, useEffect } from 'react';
-import { useTelegram } from '../../hooks/useTelegram';
+// import { useTelegram } from '../../hooks/useTelegram';
 
 const Form = () => {
 	const [country, setCountry] = useState('')
@@ -22,6 +22,7 @@ const Form = () => {
 		}  else {
 			tg.MainButton.show()
 		}
+		// eslint-disable-next-line
 	}, [country, city])
 
 	const onChangeCountry = (e) => {
