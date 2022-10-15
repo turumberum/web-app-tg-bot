@@ -9,7 +9,7 @@ import Form from './components/Form/Form';
 
 function App() {
 
-  const {onToggleButton} = useTelegram
+  // const {onToggleButton} = useTelegram
   const tg = window.Telegram.WebApp
   
   useEffect( () => {

@@ -8,10 +8,12 @@ const Form = () => {
 	const [subject, setSubject] = useState('')
 	// const {tg} = useTelegram
 	const tg = window.Telegram.WebApp;
+
 	useEffect(() => {
 		tg.MainButton.setParams({
 			text: 'Sent Form'
 		})
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect(()=> {
