@@ -9,7 +9,7 @@ import { useTelegram } from '../../hooks/useTelegram';
 	return (
 		<div className={'header'}>
 			<Button onClick={onClose}>Закрыть</Button>
-			<span className='username'>
+			<span className={'username'}>
 				{user?.username}
 			</span>
 		</div>
