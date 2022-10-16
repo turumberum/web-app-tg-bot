@@ -39,7 +39,7 @@ const ProductList = () => {
 			body: JSON.stringify(data)
 		})
 		// eslint-disable-next-line
-	}, [])
+	}, [addedItems])
 
 	useEffect(() => {
 		tg.onEvent('mainButtonClicked', onSendData)
