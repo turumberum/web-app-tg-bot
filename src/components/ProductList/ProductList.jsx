@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 import ProductItem from '../ProductItem/ProductItem';
 import './ProductList.css'
@@ -22,7 +22,33 @@ const getTotalPrice = (items) => {
 
 const ProductList = () => {
 	const [addedItems, setAddedItems] = useState([])
-	const {tg} = useTelegram()
+	const {tg, queryId} = useTelegram()
+
+	const onSendData = useCallback(() => {
+		const data = {
+			products: addedItems,
+			totalPrics: getTotalPrice(addedItems),
+			queryId: queryId
+		}
+
+		fetch('', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+		// eslint-disable-next-line
+	}, [])
+
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData)
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData)
+		}
+		// eslint-disable-next-line
+	}, [onSendData])
+
 
 	const onAdd = (product) => {
 		const alreadyAdded = addedItems.find(item => item.id === product.id)
@@ -41,7 +67,7 @@ const ProductList = () => {
 		} else {
 			tg.MainButton.show()
 			tg.MainButton.setParams({
-				text: `Купить за ${getTotalPrice(newItems)} рублей`
+				text: `Купить за ${getTotalPrice(newItems)} руб.`
 			})
 		}
 	}
