@@ -1,5 +1,5 @@
 import './Form.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
 
 const Form = () => {
@@ -7,7 +7,24 @@ const Form = () => {
 	const [city, setCity] = useState('')
 	const [subject, setSubject] = useState('')
 	const {tg} = useTelegram()
-	// const tg = window.Telegram.WebApp;
+	const onSendData = useCallback(() => {
+		const data = {
+			country,
+			city,
+			subject
+		}
+
+		tg.sendData(JSON.stringify(data))
+		// eslint-disable-next-line
+	}, [country, city, subject])
+
+	useEffect(() => {
+		tg.onEvent('mainButtonClicked', onSendData)
+		return () => {
+			tg.offEvent('mainButtonClicked', onSendData)
+		}
+		// eslint-disable-next-line
+	}, [onSendData])
 
 	useEffect(() => {
 		tg.MainButton.setParams({
