@@ -1,13 +1,13 @@
 import './Form.css'
 import React, { useState, useEffect } from 'react';
-// import { useTelegram } from '../../hooks/useTelegram';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const Form = () => {
 	const [country, setCountry] = useState('')
 	const [city, setCity] = useState('')
 	const [subject, setSubject] = useState('')
-	// const {tg} = useTelegram
-	const tg = window.Telegram.WebApp;
+	const {tg} = useTelegram()
+	// const tg = window.Telegram.WebApp;
 
 	useEffect(() => {
 		tg.MainButton.setParams({
@@ -36,7 +36,6 @@ const Form = () => {
 	const onChangeSubject = (e) => {
 		setSubject(e.target.value)
 	}
-
 
 	return (
 		<div>
