@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTelegram } from '../../hooks/useTelegram';
+import ProductItem from '../ProductItem/ProductItem';
 import './ProductList.css'
 
 const products = [
@@ -46,10 +47,16 @@ const ProductList = () => {
 	}
 
 	return (
-		<div>
-			ProductList
-		</div>
-	);
+        <div className={'list'}>
+            {products.map(item => (
+                <ProductItem
+                    product={item}
+                    onAdd={onAdd}
+                    className={'item'}
+                />
+            ))}
+        </div>
+    );
 };
 
 export default ProductList;
